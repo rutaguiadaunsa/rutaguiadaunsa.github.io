@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ruta Guiada UNSA</title>
+<meta name="description" content="Video y croquis con la ruta desde la puerta hasta tu pabellón del examen de admisión.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%237A1F2B'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%23C9A227'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root { --g: #7A1F2B; --g2: #5C1520; --suave: #F7F1EC; --borde: #E6DCD3; --texto: #2A2324; --gris: #6B6162; --oro: #C9A227; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Source Sans 3', system-ui, sans-serif; color: var(--texto); background: #FFFDFB; line-height: 1.5; font-size: 17px; }
+  a { color: inherit; }
+  .barra { background: var(--g); color: #fff; padding: 12px 18px; display: flex; align-items: center; gap: 10px; position: sticky; top: 0; z-index: 5; }
+  .barra .marca { font-weight: 800; letter-spacing: .3px; cursor: pointer; }
+  .barra .punto { width: 10px; height: 10px; border-radius: 50%; background: var(--oro); }
+  .cont { max-width: 860px; margin: 0 auto; padding: 0 16px; }
+  .hero { background: linear-gradient(160deg, var(--g) 0%, var(--g2) 100%); color: #fff; padding: 34px 0 30px; }
+  .hero h1 { font-size: clamp(28px, 6vw, 42px); line-height: 1.12; margin: 0 0 12px; font-weight: 800; }
+  .hero p { margin: 0; font-size: 18px; opacity: .93; max-width: 640px; }
+  .bloque { padding: 26px 0 6px; }
+  .bloque h2 { font-size: 24px; margin: 0 0 12px; color: var(--g); line-height: 1.2; }
+  .pasos { margin: 0; padding: 0; list-style: none; counter-reset: p; }
+  .pasos li { counter-increment: p; display: flex; gap: 12px; align-items: flex-start; margin: 10px 0; }
+  .pasos li::before { content: counter(p); flex: 0 0 30px; height: 30px; border-radius: 50%; background: var(--g); color: #fff; font-weight: 700; display: grid; place-items: center; font-size: 15px; }
+  .video { position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: 14px; overflow: hidden; background: #1d1516; margin: 14px 0 6px; }
+  .video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .pronto { display: grid; place-items: center; color: #e9dcdc; font-weight: 600; height: 100%; text-align: center; padding: 16px; }
+  .buscar { width: 100%; padding: 14px 16px; font-size: 17px; border: 2px solid var(--borde); border-radius: 12px; font-family: inherit; outline: none; }
+  .buscar:focus { border-color: var(--g); }
+  .area { margin-top: 22px; }
+  .area h3 { margin: 0 0 4px; font-size: 21px; }
+  .puerta { color: var(--gris); font-weight: 600; font-size: 15px; margin: 14px 0 8px; text-transform: uppercase; letter-spacing: .5px; }
+  .grilla { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+  .pab { text-align: left; background: #fff; border: 1.5px solid var(--borde); border-radius: 12px; padding: 13px 14px; font: inherit; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 8px; color: var(--texto); }
+  .pab:hover, .pab:focus { border-color: var(--g); background: var(--suave); outline: none; }
+  .pab span { color: var(--g); font-size: 20px; }
+  .nada { color: var(--gris); display: none; margin-top: 12px; }
+  .caja { background: var(--suave); border: 1px solid var(--borde); border-radius: 14px; padding: 18px; }
+  .volver { background: none; border: 0; color: var(--g); font: inherit; font-weight: 700; cursor: pointer; padding: 18px 0 0; }
+  .etiqueta { display: inline-block; background: var(--suave); color: var(--g); border: 1px solid var(--borde); border-radius: 999px; padding: 3px 12px; font-weight: 700; font-size: 15px; margin-bottom: 8px; }
+  .opcion { border-top: 1px solid var(--borde); padding-top: 18px; margin-top: 22px; }
+  .opcion:first-of-type { border-top: 0; margin-top: 4px; padding-top: 0; }
+  .croquis { width: 100%; border-radius: 12px; border: 1px solid var(--borde); margin: 10px 0; display: block; background: #fff; }
+  .botones { display: flex; flex-wrap: wrap; gap: 10px; margin: 8px 0 4px; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; text-decoration: none; padding: 13px 20px; border-radius: 12px; font-weight: 700; font-size: 16px; }
+  .btn.prim { background: var(--g); color: #fff; }
+  .btn.sec { border: 2px solid var(--g); color: var(--g); background: #fff; }
+  footer { margin-top: 40px; padding: 22px 0 30px; border-top: 1px solid var(--borde); color: var(--gris); font-size: 14px; }
+  .cerrado { min-height: 70vh; display: grid; place-items: center; text-align: center; padding: 30px 16px; }
+  @media (max-width: 520px) { .btn { width: 100%; } .grilla { grid-template-columns: 1fr; } }
+</style>
+<style>.cargando { min-height: 60vh; display: grid; place-items: center; color: var(--gris); font-weight: 600; }</style>
+</head>
+<body>
+<div class="barra"><div class="punto"></div><div class="marca" id="marca">Ruta Guiada UNSA</div></div>
+<main id="app"><div class="cargando">Cargando...</div></main>
+
+<script>
+/* ============ PEGA AQUÍ LOS DOS LINKS DEL SHEET (Archivo > Compartir > Publicar en la Web, formato CSV) ============ */
+const LINK_CONFIG = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTZ5spSCxbUaqYsqWkltNH_VhrTQ7AF2M5mYFzH9bgFF1erFKhYe_PV0m4PDIRFCLr1pUaU78YkvXrT/pub?gid=1470188723&single=true&output=csv';
+const LINK_RUTAS  = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTZ5spSCxbUaqYsqWkltNH_VhrTQ7AF2M5mYFzH9bgFF1erFKhYe_PV0m4PDIRFCLr1pUaU78YkvXrT/pub?gid=1153767598&single=true&output=csv';
+/* =================================================================================================================== */
+
+function csv(texto) {
+  const filas = []; let fila = [], campo = '', comillas = false;
+  for (let i = 0; i < texto.length; i++) {
+    const ch = texto[i];
+    if (comillas) {
+      if (ch === '"') { if (texto[i + 1] === '"') { campo += '"'; i++; } else comillas = false; }
+      else campo += ch;
+    } else if (ch === '"') comillas = true;
+    else if (ch === ',') { fila.push(campo); campo = ''; }
+    else if (ch === '\n' || ch === '\r') { if (ch === '\r' && texto[i + 1] === '\n') i++; fila.push(campo); filas.push(fila); fila = []; campo = ''; }
+    else campo += ch;
+  }
+  if (campo !== '' || fila.length) { fila.push(campo); filas.push(fila); }
+  return filas;
+}
+function armarDatos(tConfig, tRutas) {
+  const config = {};
+  csv(tConfig).slice(1).forEach(f => { if (f[0] && f[0].trim()) config[f[0].trim()] = (f[1] || '').trim(); });
+  const rutas = [];
+  csv(tRutas).slice(1).forEach(f => {
+    if (!f[3] || !f[3].trim() || String(f[8] || '').trim().toUpperCase() === 'NO') return;
+    rutas.push({ orden: Number(f[0]) || 999, area: (f[1] || '').trim(), puerta: (f[2] || '').trim(), pabellon: f[3].trim(),
+      opcion: (f[4] || '').trim(), video: (f[5] || '').trim(), croquis: (f[7] || '').trim() });
+  });
+  rutas.sort((a, b) => a.orden - b.orden);
+  return { config, rutas };
+}
+
+function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
+function ytId(u) {
+  u = String(u || '').trim(); if (!u) return '';
+  const m = u.match(/(?:youtu\.be\/|[?&]v=|embed\/|shorts\/|live\/)([A-Za-z0-9_-]{11})/);
+  return m ? m[1] : (/^[A-Za-z0-9_-]{11}$/.test(u) ? u : '');
+}
+function video(u, rotulo) {
+  const id = ytId(u);
+  if (!id) return '<div class="video"><div class="pronto">' + esc(rotulo || 'Video disponible pronto') + '</div></div>';
+  return '<div class="video"><iframe src="https://www.youtube-nocookie.com/embed/' + id + '?rel=0" title="Video" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe></div>';
+}
+function slug(s) { return String(s).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); }
+
+// Agrupar rutas por pabellón (Artes, Ing. Química e Ing. Civil tienen dos opciones)
+let PABS = [], PORSLUG = {}, C = {}, pie = '';
+function agrupar(DATOS) { PABS = []; PORSLUG = {}; (DATOS.rutas || []).forEach(r => {
+  const k = slug(r.area + '-' + r.pabellon);
+  if (!PORSLUG[k]) { PORSLUG[k] = { slug: k, nombre: r.pabellon, area: r.area, puerta: r.puerta, rutas: [] }; PABS.push(PORSLUG[k]); }
+  PORSLUG[k].rutas.push(r);
+}); }
+
+const app = document.getElementById('app');
+
+function inicio() {
+  const pasos = String(C.pasos || '').split('|').map(s => s.trim()).filter(Boolean);
+  const areas = [];
+  PABS.forEach(p => { let a = areas.find(x => x.nombre === p.area); if (!a) { a = { nombre: p.area, puertas: [] }; areas.push(a); }
+    let pu = a.puertas.find(x => x.nombre === p.puerta); if (!pu) { pu = { nombre: p.puerta, pabs: [] }; a.puertas.push(pu); } pu.pabs.push(p); });
+  let h = '<section class="hero"><div class="cont"><h1>' + esc(C.titulo) + '</h1><p>' + esc(C.descripcion) + '</p></div></section>';
+  h += '<div class="cont">';
+  h += '<section class="bloque"><h2>' + esc(C.pregunta) + '</h2><ol class="pasos">' + pasos.map(p => '<li>' + esc(p) + '</li>').join('') + '</ol>';
+  h += video(C.video_intro, 'Video de bienvenida disponible pronto') + '</section>';
+  h += '<section class="bloque" id="lista"><h2>Busca tu pabellón</h2><input class="buscar" id="buscar" type="search" placeholder="Escribe tu pabellón (ej.: Industrial)" autocomplete="off">';
+  areas.forEach(a => {
+    h += '<div class="area"><h3>' + esc(a.nombre) + '</h3>';
+    a.puertas.forEach(pu => {
+      h += '<div class="grupo"><div class="puerta">' + esc(pu.nombre) + '</div><div class="grilla">';
+      pu.pabs.forEach(p => { h += '<button class="pab" data-s="' + p.slug + '" data-n="' + esc(slug(p.nombre)) + '">' + esc(p.nombre) + '<span>›</span></button>'; });
+      h += '</div></div>';
+    });
+    h += '</div>';
+  });
+  h += '<p class="nada" id="nada">No encontramos ese pabellón. Revisa cómo está escrito en tu carné.</p></section>';
+  if (C.titulo_consejos || C.video_consejos) {
+    h += '<section class="bloque"><div class="caja"><h2>' + esc(C.titulo_consejos) + '</h2><p style="margin:0">' + esc(C.texto_consejos) + '</p>' + video(C.video_consejos, 'Video de consejos disponible pronto') + '</div></section>';
+  }
+  h += '</div>' + pie;
+  app.innerHTML = h;
+  app.querySelectorAll('.pab').forEach(b => b.onclick = () => ir(b.dataset.s));
+  const q = document.getElementById('buscar');
+  q.oninput = () => {
+    const t = slug(q.value); let vis = 0;
+    app.querySelectorAll('.pab').forEach(b => { const ok = !t || b.dataset.n.indexOf(t) >= 0; b.style.display = ok ? '' : 'none'; if (ok) vis++; });
+    app.querySelectorAll('.grupo').forEach(g => { g.style.display = [...g.querySelectorAll('.pab')].some(b => b.style.display !== 'none') ? '' : 'none'; });
+    app.querySelectorAll('.area').forEach(a => { a.style.display = [...a.querySelectorAll('.pab')].some(b => b.style.display !== 'none') ? '' : 'none'; });
+    document.getElementById('nada').style.display = vis ? 'none' : 'block';
+  };
+}
+
+function pabellon(p) {
+  const varias = p.rutas.length > 1;
+  let h = '<div class="cont"><button class="volver" id="volver">‹ Volver a la lista</button>';
+  h += '<section class="bloque"><span class="etiqueta">' + esc(p.area) + '</span><h2 style="font-size:30px">Pabellón: ' + esc(p.nombre) + '</h2>';
+  h += '<p>' + (varias ? 'Este pabellón tiene dos rutas, según la puerta por la que entres. ' : 'Entras por la <b>' + esc(p.puerta) + '</b>. ') + esc(C.texto_pabellon) + '</p>';
+  p.rutas.forEach(r => {
+    h += '<div class="opcion">';
+    if (varias) h += '<h2 style="font-size:21px">Si entras por la ' + esc(r.puerta) + '</h2>';
+    h += video(r.video, 'Video de esta ruta disponible pronto');
+    if (r.croquis) {
+      h += '<img class="croquis" alt="Croquis de la ruta" src="https://drive.google.com/thumbnail?id=' + encodeURIComponent(r.croquis) + '&sz=w1600" onerror="this.style.display=\'none\'">';
+      h += '<div class="botones"><a class="btn prim" target="_blank" rel="noopener" href="https://drive.google.com/uc?export=download&id=' + encodeURIComponent(r.croquis) + '">Descargar croquis (PDF)</a>';
+      h += '<a class="btn sec" target="_blank" rel="noopener" href="https://drive.google.com/file/d/' + encodeURIComponent(r.croquis) + '/view">Ver croquis en pantalla completa</a></div>';
+    } else { h += '<p class="caja">Croquis disponible pronto.</p>'; }
+    h += '</div>';
+  });
+  h += '</section></div>' + pie;
+  app.innerHTML = h;
+  document.getElementById('volver').onclick = () => { deLista = true; ir(''); };
+}
+
+function cerrado() {
+  app.innerHTML = '<div class="cerrado"><div><h2 style="color:var(--g);font-size:28px">' + esc(C.nombre_sitio) + '</h2><p style="font-size:19px">' + esc(C.mensaje_cerrado) + '</p></div></div>';
+}
+
+
+// Navegación con # para que funcione el botón Atrás del celular y se pueda compartir el link de un pabellón
+function ir(s, alLista) { location.hash = s ? '#/' + s : '#/'; if (!s && alLista) setTimeout(() => { const l = document.getElementById('lista'); if (l) l.scrollIntoView(); }, 0); }
+let deLista = false;
+function mostrar() {
+  const s = decodeURIComponent((location.hash || '').replace(/^#\/?/, ''));
+  if (String(C.activo || 'SI').trim().toUpperCase() === 'NO') { cerrado(); return; }
+  if (s && PORSLUG[s]) { pabellon(PORSLUG[s]); window.scrollTo(0, 0); }
+  else { inicio(); if (deLista) { const l = document.getElementById('lista'); if (l) l.scrollIntoView(); } else window.scrollTo(0, 0); }
+  deLista = false;
+}
+window.addEventListener('hashchange', mostrar);
+
+function iniciar(DATOS) {
+  C = DATOS.config || {};
+  if (C.color && /^#[0-9a-fA-F]{6}$/.test(C.color)) document.documentElement.style.setProperty('--g', C.color);
+  document.title = C.nombre_sitio || 'Ruta Guiada UNSA';
+  const marca = document.getElementById('marca'); marca.textContent = C.nombre_sitio || 'Ruta Guiada UNSA'; marca.onclick = () => ir('');
+  pie = '<footer><div class="cont">' + esc(C.pie || '') + '</div></footer>';
+  agrupar(DATOS); mostrar();
+}
+
+// Carga: primero muestra lo último guardado en el celular (si hay) y luego trae lo nuevo del Sheet
+(async function () {
+  let guardado = null;
+  try { guardado = JSON.parse(localStorage.getItem('rutaunsa_datos') || 'null'); } catch (e) {}
+  if (guardado) iniciar(guardado);
+  try {
+    const v = '&t=' + Math.floor(Date.now() / 60000);
+    const [a, b] = await Promise.all([fetch(LINK_CONFIG + v).then(r => r.text()), fetch(LINK_RUTAS + v).then(r => r.text())]);
+    const datos = armarDatos(a, b);
+    if (!datos.rutas.length) throw new Error('sin rutas');
+    try { localStorage.setItem('rutaunsa_datos', JSON.stringify(datos)); } catch (e) {}
+    iniciar(datos);
+  } catch (e) {
+    if (!guardado) app.innerHTML = '<div class="cargando">No se pudo cargar la información. Revisa tu conexión y recarga la página.</div>';
+  }
+})();
+</script>
+</body>
+</html>
